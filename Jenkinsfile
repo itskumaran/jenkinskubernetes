@@ -9,7 +9,7 @@ node {
 
     stage('Build image') {
   
-       app = docker.build("raj80dockerid/test")
+       app = docker.build("dockertrain44/v1")
     }
 
     stage('Test image') {
@@ -32,11 +32,11 @@ node {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                     withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         //def encodedPassword = URLEncoder.encode("$GIT_PASSWORD",'UTF-8')
-                        sh "git config user.email raj@cloudwithraj.com"
-                        sh "git config user.name RajSaha"
+                        sh "git config user.email muthuwave44@gmail.com"
+                        sh "git config user.name itskumaran"
                         //sh "git switch master"
                         sh "cat deployment.yaml"
-                        sh "sed -i 's+raj80dockerid/test.*+raj80dockerid/test:${env.BUILD_NUMBER}+g' deployment.yaml"
+                        sh "sed -i 's+dockertrain44/v1.*+dockertrain44/test:${env.BUILD_NUMBER}+g' deployment.yaml"
                         sh "cat deployment.yaml"
                         sh "git add ."
                         sh "git commit -m 'Triggered Build: ${env.BUILD_NUMBER}'"
